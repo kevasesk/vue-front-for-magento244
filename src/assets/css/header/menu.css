@@ -17,6 +17,3 @@
 .menu li:hover {
     border-bottom: 2px var(--green) solid;
 }
-.menu li a:hover {
-    color: var(--green);
-}

@@ -40,8 +40,8 @@ export default {
                 </div>
                 <img :src="logo" class="logo" alt="logo"/>
                 <div class="control-panel">
-                    <div class="lang">English <img :src="arrowDown"/> </div>
-                    <div class="currency">USD <img :src="arrowDown"/> </div>
+                    <div class="lang"><a href="">English <img :src="arrowDown"/></a></div>
+                    <div class="currency"><a href="">USD <img :src="arrowDown"/></a></div>
                     <div class="wishlist"><img :src="wishlistIcon"/></div>
                     <div class="customer"><img :src="customerIcon"/></div>
                     <div class="cart"><img :src="cartIcon"/></div>

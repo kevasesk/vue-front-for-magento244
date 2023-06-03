@@ -14,7 +14,8 @@
     --grey: #A2A2A2;
     --dark-grey: #828282;
     --light-grey: #E0E0E0;
-    --black: #212121;
+    --black: rgb(33, 33, 33);
+    --black-transparent: rgba(33, 33, 33, 0.5);
     --red: #E46D6D;
     --green: #7DB800;
     /*--base-font-family: 'Poppins';*/
@@ -61,5 +62,11 @@ h3 {
     line-height: 21px;
 }
 .container {
-    padding: 0px 5%;
+    padding: 0 10%;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: var(--green);
 }
