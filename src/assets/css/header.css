@@ -1,0 +1,22 @@
+@import './header/search.css';
+@import './header/menu.css';
+
+header {
+    background-color: var(--black);
+    height: 170px;
+}
+.header-top {
+    height: 70px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+.control-panel{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.lang, .currency, .wishlist, .customer, .cart {
+    display: inline-block;
+    margin: 5px 10px;
+}

@@ -1,0 +1,22 @@
+.menu-container {
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    list-style: none;
+    margin-top: 37px;
+}
+.menu a {
+    text-decoration: none;
+}
+.menu li {
+    float: left;
+    margin-right: 40px;
+}
+.menu li:hover {
+    border-bottom: 2px var(--green) solid;
+}
+.menu li a:hover {
+    color: var(--green);
+}

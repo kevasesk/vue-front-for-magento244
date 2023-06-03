@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../css/fonts/Poppins/Poppins-Light.ttf') format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    color: #ffffff;
+}
 :root {
     --grey: #A2A2A2;
     --dark-grey: #828282;
@@ -5,10 +17,8 @@
     --black: #212121;
     --red: #E46D6D;
     --green: #7DB800;
-
-    font-family: 'Poppins';
-    font-style: normal;
-    color: #000000;
+    /*--base-font-family: 'Poppins';*/
+    /*--base-font-style: normal;*/
 }
 h1 {
     font-weight: 300;
@@ -49,4 +59,7 @@ h3 {
     font-weight: 300;
     font-size: 14px;
     line-height: 21px;
+}
+.container {
+    padding: 0px 5%;
 }
