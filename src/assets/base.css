@@ -1,0 +1,52 @@
+:root {
+    --grey: #A2A2A2;
+    --dark-grey: #828282;
+    --light-grey: #E0E0E0;
+    --black: #212121;
+    --red: #E46D6D;
+    --green: #7DB800;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    color: #000000;
+}
+h1 {
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 120%;
+}
+h2 {
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 147.5%;
+}
+h3 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 147.5%;
+}
+.title {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 147.5%;
+}
+.menu-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+.small-text {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+}
+.button-text {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 138.69%;
+}
+.small-text {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+}
