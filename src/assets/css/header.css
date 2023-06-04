@@ -4,6 +4,10 @@
 header {
     background-color: var(--black);
     height: 170px;
+    color: #ffffff;
+}
+header a{
+    color: #ffffff;
 }
 .header-top {
     height: 70px;

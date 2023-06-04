@@ -1,3 +1,8 @@
 @import './base.css';
 @import './header.css';
 @import './page-title.css';
+@import './pages/category.css';
+
+.products {
+    color: var(--black);
+}

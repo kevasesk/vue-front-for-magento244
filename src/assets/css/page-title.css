@@ -1,5 +1,9 @@
 .page-title {
     height: 180px;
+    color: #ffffff;
+}
+.page-title a {
+    color: #ffffff;
 }
 .page-title .container {
     display: grid;
