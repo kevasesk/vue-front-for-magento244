@@ -3,6 +3,8 @@
 @import './page-title.css';
 @import './pages/category.css';
 
+@import './footer.css';
+
 .products {
     color: var(--black);
 }

@@ -52,13 +52,13 @@ h3 {
 }
 .button-text {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 138.69%;
 }
-.small-text {
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
+.tiny-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
 }
 .container {
     padding: 0 10%;

@@ -1,0 +1,40 @@
+.compare-container {
+    margin-top: 30px;
+}
+
+.compare-container .items-count {
+    color: var(--dark-grey);
+}
+
+.compare-container a{
+    color: var(--black);
+    border-bottom: 1px solid var(--black);
+}
+
+.compare-product {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    align-items: center;
+    padding: 0 5px;
+    margin-top: 15px;
+}
+
+.compare-product .cross {
+    width: 10px;
+    height: 10px;
+}
+.compare__actions {
+    margin-top: 27px;
+    display: flex;
+    align-items: center;
+}
+.compare__actions .compare {
+    background-color: var(--green);
+    border-radius: 2px;
+    color: white;
+    width: 70px;
+    padding: 10px 15px;
+}
+.compare__actions .clear-all {
+    margin-left: 25px;
+}

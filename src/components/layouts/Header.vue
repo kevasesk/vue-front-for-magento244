@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 
 //Components
 import Menu from '@/components/layouts/header/Menu.vue'
@@ -40,11 +40,11 @@ export default {
                 </div>
                 <img :src="logo" class="logo" alt="logo"/>
                 <div class="control-panel">
-                    <div class="lang"><a href="">English <img :src="arrowDown"/></a></div>
-                    <div class="currency"><a href="">USD <img :src="arrowDown"/></a></div>
-                    <div class="wishlist"><img :src="wishlistIcon"/></div>
-                    <div class="customer"><img :src="customerIcon"/></div>
-                    <div class="cart"><img :src="cartIcon"/></div>
+                    <div class="link"><a href="">English <img :src="arrowDown"/></a></div>
+                    <div class="link"><a href="">USD <img :src="arrowDown"/></a></div>
+                    <div class="link"><img :src="wishlistIcon"/></div>
+                    <div class="link"><img :src="customerIcon"/></div>
+                    <div class="link"><img :src="cartIcon"/></div>
                 </div>
             </div>
             <Menu/>

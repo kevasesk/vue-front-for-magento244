@@ -20,7 +20,7 @@ header a{
     display: flex;
     align-items: center;
 }
-.lang, .currency, .wishlist, .customer, .cart {
+header .link {
     display: inline-block;
     margin: 5px 10px;
 }

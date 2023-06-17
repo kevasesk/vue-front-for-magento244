@@ -1,0 +1,17 @@
+.filters-container {
+    display: grid;
+    margin-top: 25px;
+}
+.filters-container .filter {
+    height: 45px;
+    border-top: 1px solid #DEDEDE;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
+}
+.filters-container:last-child {
+     border-bottom: 1px solid #DEDEDE;
+}
