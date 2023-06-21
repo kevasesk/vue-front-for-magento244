@@ -13,6 +13,7 @@
     --grey: #A2A2A2;
     --dark-grey: #828282;
     --light-grey: #E0E0E0;
+    --light-grey-2: #F0F0F0;
     --black: rgb(33, 33, 33);
     --black-transparent: rgba(33, 33, 33, 0.5);
     --red: #E46D6D;
@@ -34,6 +35,11 @@ h3 {
     font-weight: 600;
     font-size: 18px;
     line-height: 147.5%;
+}
+.black-title {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 147.5%
 }
 .title {
     font-weight: 300;
