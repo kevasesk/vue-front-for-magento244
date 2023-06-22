@@ -1,0 +1,124 @@
+.customer-registration-container {
+    margin-top: 30px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 640px;
+    justify-items: start;
+    line-height: 30px;
+}
+.customer-registration-container .form-elements{
+    margin-top: 30px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+.customer-registration-container h3 {
+    margin-top: 70px;
+}
+.customer-registration-container input[type="text"],
+.customer-registration-container input[type="email"],
+.customer-registration-container input[type="password"]
+{
+    height: 50px;
+    width: 480px;
+    border: 1px solid var(--grey);
+    color: #3F3F3F;
+    padding: 0 18px;
+}
+
+.sign-up{
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: 35px 1fr;
+    align-items: center;
+    justify-items: start;
+    color: var(--dark-grey)
+}
+.sign-up input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--grey);
+    border-radius: 0;
+}
+.required{
+    color: #EB5757;
+}
+.form-actions {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.form-actions .create{
+    justify-self: start;
+}
+.form-actions button {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+}
+.form-actions .back{
+    justify-self: end;
+}
+.form-actions .back a {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 138.69%;
+    color: var(--grey);
+}
+/* Dashboard */
+.customer-dashboard-container {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 288px 1fr;
+    grid-gap: 100px;
+    color: var(--dark-grey);
+}
+.customer-dashboard-container .main-info-container a {
+    color: var(--black);
+    border-bottom: 1px solid white;
+}
+.customer-dashboard-container .main-info-container a:hover {
+    border-bottom: 1px solid var(--black);
+}
+.customer-dashboard-container .links a {
+    color: var(--dark-grey);
+}
+.customer-dashboard-container .links ul {
+    list-style: none;
+}
+.customer-dashboard-container .links li {
+    padding: 5px 15px;
+}
+.customer-dashboard-container h3{
+    color: var(--black);
+}
+.customer-dashboard-container h5{
+    color: var(--green);
+}
+.customer-dashboard-container .links li.active,.customer-dashboard-container .links li:hover  {
+   background-color: var(--light-grey-2);
+    color: var(--black);
+}
+.main-info-container {
+    display: grid;
+    grid-gap: 64px;
+}
+.main-info-container .information-container {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 300px 300px;
+}
+.main-info-container .info {
+    margin-top: 10px;
+}
+.customer-dashboard-container .line{
+    display: flex;
+    gap: 15px;
+}
+.customer-dashboard-container .actions{
+    margin-top: 35px;
+    display: flex;
+    gap:30px;
+}

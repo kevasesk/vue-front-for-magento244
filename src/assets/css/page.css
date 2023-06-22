@@ -1,0 +1,23 @@
+.page-container {
+    margin-top: 50px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 640px;
+    justify-items: start;
+    line-height: 30px;
+}
+.share-container {
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+}
+.share-container img {
+    width: 15px;
+    height: 15px;
+    padding: 10px;
+    background-color: var(--light-grey-2);
+}
+.page-content img, .page-content p {
+    margin: 40px 0px;
+}
+

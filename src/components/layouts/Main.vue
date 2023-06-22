@@ -1,14 +1,11 @@
-<script lang="ts">
+<script setup>
 import Category from '@/components/pages/Category.vue'
-
-export default {
-    components: {
-        Category,
-    },
-}
+import Page from '@/components/pages/Page.vue'
+import NewCustomer from '@/components/customer/NewCustomer.vue'
+import Dashboard from '@/components/customer/Dashboard.vue'
 </script>
 <template>
     <main>
-        <Category/>
+        <Dashboard/>
     </main>
 </template>
