@@ -122,3 +122,10 @@
     display: flex;
     gap:30px;
 }
+.customer-registration-container .errors {
+    color: var(--red);
+}
+.customer-registration-container .messages {
+    color: var(--green);
+}
+

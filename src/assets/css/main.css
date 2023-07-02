@@ -1,4 +1,5 @@
 @import './base.css';
+@import './homepage.css';
 @import './header.css';
 @import './page-title.css';
 @import './pages/category.css';
@@ -8,6 +9,9 @@
 
 @import './footer.css';
 
+ul{
+    list-style: none;
+}
 .products {
     color: var(--black);
 }
@@ -17,4 +21,12 @@
     color: white;
     padding: 10px 15px;
     border: 0;
+}
+.router-link-active{
+    color: var(--green);
+}
+.not-found-container{
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
 }

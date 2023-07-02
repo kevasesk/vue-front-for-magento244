@@ -1,8 +1,10 @@
 .filters-container {
     display: grid;
     margin-top: 25px;
+    min-width: 250px;
 }
 .filters-container .filter {
+    cursor: pointer;
     height: 45px;
     border-top: 1px solid #DEDEDE;
 
@@ -12,6 +14,17 @@
 
     padding: 0 10px;
 }
+.filters-container .filter.active .arrow {
+    transform: rotate(180deg);
+}
 .filters-container:last-child {
      border-bottom: 1px solid #DEDEDE;
+}
+
+.filters-container .filter-values {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.filter-values span{
+    margin-left: 5px;
 }

@@ -25,6 +25,10 @@
 .sorts .view{
     padding: 10px;
     background-color: var(--light-grey-2);
+    cursor: pointer;
+}
+.sorts .sort-direction{
+    cursor: pointer;
 }
 .sorts .view.active {
     background-color: #DEDEDE;
@@ -42,9 +46,14 @@
 }
 
 
-.product-list{
+.product-list-grid{
     margin-top: 17px;
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+.product-list-list{
+    margin-top: 17px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
 }

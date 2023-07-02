@@ -1,4 +1,4 @@
-<script>
+<script setup>
 
 //Components
 import Menu from '@/components/layouts/header/Menu.vue'
@@ -11,22 +11,6 @@ import WishlistIcon from '@/assets/images/header/wishlist.svg';
 import CustomerIcon from '@/assets/images/header/customer.svg';
 import CartIcon from '@/assets/images/header/cart.svg';
 
-export default {
-    components: {
-        Menu,
-    },
-    data() {
-        return {
-            searchIcon: SearchIcon,
-            logo: Logo,
-
-            arrowDown: ArrowDownIcon,
-            wishlistIcon: WishlistIcon,
-            customerIcon: CustomerIcon,
-            cartIcon: CartIcon,
-        };
-    }
-};
 </script>
 <template>
     <header>
@@ -35,16 +19,16 @@ export default {
                 <div class="search-form">
                     <form action="/" method="GET">
                         <input type="text" name="search" class="small-text" placeholder="Search"/>
-                        <img :src="searchIcon" alt="search" class="search-icon"/>
+                        <img :src="SearchIcon" alt="search" class="search-icon"/>
                     </form>
                 </div>
-                <img :src="logo" class="logo" alt="logo"/>
+                <img :src="Logo" class="logo" alt="logo"/>
                 <div class="control-panel">
-                    <div class="link"><a href="">English <img :src="arrowDown"/></a></div>
-                    <div class="link"><a href="">USD <img :src="arrowDown"/></a></div>
-                    <div class="link"><img :src="wishlistIcon"/></div>
-                    <div class="link"><img :src="customerIcon"/></div>
-                    <div class="link"><img :src="cartIcon"/></div>
+                    <div class="link"><a href="">English <img :src="ArrowDownIcon"/></a></div>
+                    <div class="link"><a href="">USD <img :src="ArrowDownIcon"/></a></div>
+                    <div class="link"><img :src="WishlistIcon"/></div>
+                    <div class="link"><img :src="CustomerIcon"/></div>
+                    <div class="link"><img :src="CartIcon"/></div>
                 </div>
             </div>
             <Menu/>
