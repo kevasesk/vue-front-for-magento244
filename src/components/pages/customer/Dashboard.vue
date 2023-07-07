@@ -1,24 +1,33 @@
+<script setup>
+import Sidebar from '@/components/pages/customer/Sidebar.vue'
+import { useRouter } from 'vue-router';
+import { usePageStore } from '@/store/page'
+import { useCustomerStore } from '@/store/customer'
+import {onMounted} from "vue";
+
+
+const page = usePageStore();
+page.setTitle('Customer Account');
+
+const customer = useCustomerStore();
+onMounted(() => {
+    customer.initCustomer()
+})
+</script>
 <template>
     <div class="container">
         <div class="customer-dashboard-container">
-            <div class="links">
-                <ul>
-                    <li><a href="#">Account Dashboard</a></li>
-                    <li><a href="#">Account Information</a></li>
-                    <li><a href="#">My Orders</a></li>
-                    <li><a href="#">My Wishlist</a></li>
-                    <li><a href="#">Newsletter Subscriptions</a></li>
-                </ul>
-            </div>
-            <div class="main-info-container">
+            <Sidebar/>
+            <div class="main-info-container" v-if="customer.customer">
                 <div class="area-container">
                     <h3>Account Information</h3>
                     <div class="information-container">
                         <div class="area-information">
                             <h5>Contact Information</h5>
                             <div class="info">
-                                Alex Driver<br/>
-                                ExampeAdress@gmail.com
+                                {{customer.customer.email}}<br/>
+                                {{customer.customer.firstname}}<br/>
+                                {{customer.customer.lastname}}<br/>
                             </div>
                             <div class="actions">
                                 <a href="#">Edit</a>
@@ -27,11 +36,14 @@
                         </div>
                         <div class="area-information">
                             <h5>Newsletters</h5>
-                            <div class="info">
+                            <div class="info" v-if="!customer.customer.is_subscribed">
                                 You don't subscribe to our newsletter.
                             </div>
+                            <div class="info" v-if="customer.customer.is_subscribed">
+                                You subscribed to our newsletter!
+                            </div>
                             <div class="actions">
-                                <a href="#">Edit</a>
+                                <router-link to="/subs">Edit</router-link>
                             </div>
                         </div>
                     </div>
@@ -43,19 +55,21 @@
                     </div>
 
                     <div class="information-container">
-                        <div class="area-information">
+                        <div class="area-information" v-if="customer.getDefaultBillingAddress()">
                             <h5>Default Billing Address</h5>
                             <div class="info">
-                                You have not set a default billing address.
+                                {{customer.getDefaultBillingAddress().city}}<br/>
+                                {{customer.getDefaultBillingAddress().telephone}}<br/>
                             </div>
                             <div class="actions">
                                 <a href="#">Edit Address</a>
                             </div>
                         </div>
-                        <div class="area-information">
+                        <div class="area-information" v-if="customer.getDefaultShippingAddress()">
                             <h5>Default Shipping Address</h5>
                             <div class="info">
-                                You have not set a default billing address.
+                                {{customer.getDefaultShippingAddress().city}}<br/>
+                                {{customer.getDefaultShippingAddress().telephone}}<br/>
                             </div>
                             <div class="actions">
                                 <a href="#">Edit Address</a>

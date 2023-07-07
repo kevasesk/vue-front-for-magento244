@@ -1,0 +1,23 @@
+.notification__container {
+    position: fixed;
+    top:20px;
+    right:20px;
+    color: var(--black);
+}
+.notification__container-text{
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 2px;
+    max-width: 300px;
+    background-color: white;
+}
+.notification__container-text.success{
+    background-color: var(--green);
+}
+.notification__container-text.error{
+    background-color: var(--red);
+}
+.notification__container-text.info{
+    background-color: deepskyblue;
+}
+

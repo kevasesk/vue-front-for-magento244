@@ -1,8 +1,13 @@
 <script setup>
 import { ref } from 'vue'
-import ApolloClient from 'apollo-boost'
-import { GENERATE_CUSTOMER_TOKEN } from '@/graphql/customer'
 import { usePageStore } from '@/store/page'
+import { useCustomerStore } from '@/store/customer'
+import { useRouter } from 'vue-router';
+
+import ApolloClient from 'apollo-boost'
+
+import { GENERATE_CUSTOMER_TOKEN } from '@/graphql/customer'
+
 
 const page = usePageStore();
 page.setTitle('Customer Login');
@@ -14,6 +19,7 @@ const form = ref({
 
 const errors = ref([])
 const messages = ref([])
+const router = useRouter()
 
 async function postForm(){
     if (!form.value.email
@@ -21,20 +27,8 @@ async function postForm(){
     ) {
         errors.value.push('Required!');
     } else {
-        const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-        await apolloClient.mutate({
-            mutation: GENERATE_CUSTOMER_TOKEN,
-            variables: {
-                email: form.value.email,
-                password: form.value.password,
-            }
-        }).then(async (response) => {
-            messages.value.push('Success!');
-            console.log(response);//ysemenov
-        }).catch(error => {
-            errors.value.push(error);
-            console.log(error);//ysemenov
-        });
+        const customer = useCustomerStore();
+        await customer.login(form.value.email, form.value.password);
     }
 }
 </script>
@@ -65,7 +59,7 @@ async function postForm(){
             <div class="form-actions">
                 <div><button class="green-button" type="submit">Login</button></div>
                 <div class="back">
-                    <router-link :to="this.$router.options.history.state.back">Go Back</router-link>
+                    <router-link to="this.$router.options.history.state.back">Go Back</router-link>
                 </div>
             </div>
 

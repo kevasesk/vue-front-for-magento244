@@ -90,7 +90,7 @@ async function postForm(){
             <div class="form-actions">
                 <div><button class="green-button" type="submit">Create an Account</button></div>
                 <div class="back">
-                    <router-link :to="this.$router.options.history.state.back">Go Back</router-link>
+                    <router-link to="this.$router.options.history.state.back">Go Back</router-link>
                 </div>
             </div>
 

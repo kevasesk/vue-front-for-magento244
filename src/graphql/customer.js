@@ -23,3 +23,28 @@ export const GENERATE_CUSTOMER_TOKEN = gql`
         }
     }
 `;
+
+export const SUBSCRIBE = gql`
+    mutation Subscribe($email: String!) {
+        subscribeEmailToNewsletter(email: $email){
+            status
+        }
+    }
+`;
+
+export const CUSTOMER = gql`
+    query {
+        customer {
+            email
+            firstname
+            lastname
+            is_subscribed
+            addresses{
+                id
+                city
+                telephone
+                default_shipping
+                default_billing
+            }
+        }
+    }`;

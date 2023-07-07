@@ -11,6 +11,8 @@ import WishlistIcon from '@/assets/images/header/wishlist.svg';
 import CustomerIcon from '@/assets/images/header/customer.svg';
 import CartIcon from '@/assets/images/header/cart.svg';
 
+import { useCustomerStore } from '@/store/customer'
+const customer = useCustomerStore();
 </script>
 <template>
     <header>
@@ -24,11 +26,23 @@ import CartIcon from '@/assets/images/header/cart.svg';
                 </div>
                 <img :src="Logo" class="logo" alt="logo"/>
                 <div class="control-panel">
-                    <div class="link"><a href="">English <img :src="ArrowDownIcon"/></a></div>
-                    <div class="link"><a href="">USD <img :src="ArrowDownIcon"/></a></div>
-                    <div class="link"><img :src="WishlistIcon"/></div>
-                    <div class="link"><img :src="CustomerIcon"/></div>
-                    <div class="link"><img :src="CartIcon"/></div>
+                    <!--                    <div class="link"><a href="">English <img :src="ArrowDownIcon"/></a></div>-->
+                    <!--                    <div class="link"><a href="">USD <img :src="ArrowDownIcon"/></a></div>-->
+                    <div class="link">
+                        <router-link to="/wishlist"><img :src="WishlistIcon"/></router-link>
+                    </div>
+                    <div class="link" v-if="customer.isLoggedIn">
+                        <router-link to="/account"><img :src="CustomerIcon"/></router-link>
+                    </div>
+                    <div class="link" v-if="!customer.isLoggedIn">
+                        <router-link to="/login"><img :src="CustomerIcon"/></router-link>
+                    </div>
+                    <div class="link" v-if="customer.isLoggedIn">
+                        <a href="#" @click="customer.logout">Logout</a>
+                    </div>
+                    <div class="link">
+                        <router-link to="/cart"><img :src="CartIcon"/></router-link>
+                    </div>
                 </div>
             </div>
             <Menu/>

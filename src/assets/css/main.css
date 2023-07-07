@@ -8,6 +8,7 @@
 @import './checkout.css';
 
 @import './footer.css';
+@import './noty.css';
 
 ul{
     list-style: none;

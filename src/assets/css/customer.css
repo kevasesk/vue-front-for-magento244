@@ -89,6 +89,9 @@
     list-style: none;
 }
 .customer-dashboard-container .links li {
+    margin-bottom: 15px;
+}
+.customer-dashboard-container .links a {
     padding: 5px 15px;
 }
 .customer-dashboard-container h3{
@@ -97,9 +100,9 @@
 .customer-dashboard-container h5{
     color: var(--green);
 }
-.customer-dashboard-container .links li.active,.customer-dashboard-container .links li:hover  {
+.customer-dashboard-container .links li.active,.customer-dashboard-container .links a:hover  {
    background-color: var(--light-grey-2);
-    color: var(--black);
+   color: var(--black);
 }
 .main-info-container {
     display: grid;
@@ -127,5 +130,9 @@
 }
 .customer-registration-container .messages {
     color: var(--green);
+}
+.customer-dashboard-container .links .router-link-active{
+    background-color: var(--light-grey-2);
+    color: var(--black);
 }
 
