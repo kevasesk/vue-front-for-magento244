@@ -44,6 +44,7 @@ export const GET_CATEGORY_PRODUCT_LISTING = gql`
             }
             total_count
             items{
+                id
                 name
                 sku
                 price{

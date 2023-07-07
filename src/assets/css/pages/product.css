@@ -1,0 +1,15 @@
+.product-breadcrumbs{
+    margin-top: 25px;
+}
+.product-container{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 700px 500px;
+    grid-gap: 33px;
+}
+.product-container__gallery .preview-image{
+    margin: 10px 10px 0px 0px;
+}
+.product-container__price-stock{
+    display: grid;
+}

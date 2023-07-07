@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue'
 
 import Category from '@/components/pages/Category.vue'
+import Product from '@/components/pages/Product.vue'
 import Page from '@/components/pages/Page.vue'
 import NewCustomer from '@/components/pages/customer/NewCustomer.vue'
 import Login from '@/components/pages/customer/Login.vue'
@@ -25,6 +26,8 @@ const routes = [
     { path: '/home', redirect: { name: 'homepage' } },
     { path: '/category', redirect: { name: 'homepage' } },
     { path: '/category/:id', component: Category },
+    { path: '/product/', redirect: { name: 'homepage' } },
+    { path: '/product/:sku', component: Product, name: 'product' },
     { path: '/registration', component: NewCustomer },
     { path: '/login', component: Login, name: 'login' },
     { path: '/account', component: Dashboard, name:'account', meta: { requiresAuth: true } },
