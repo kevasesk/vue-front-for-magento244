@@ -17,7 +17,7 @@ ul{
 .products {
     color: var(--black);
 }
-.green-button {
+.green-button, a.green-button {
     background-color: var(--green);
     border-radius: 2px;
     color: white;

@@ -1,7 +1,8 @@
 <script setup>
 import {useRoute} from "vue-router";
 import {useProductStore} from "@/store/product";
-import {onMounted} from "vue";
+import {useCartStore} from "@/store/cart";
+import {onMounted, ref} from "vue";
 
 import Breadcrumbs from '@/components/product/Breadcrumbs.vue'
 
@@ -10,6 +11,8 @@ import ProductImagePreview from '@/assets/images/product_image_preview.png';
 
 const route = useRoute();
 const product = useProductStore()
+const cart = useCartStore()
+const qty = ref(1);
 onMounted(() => {
     product.initProduct(route.params.sku)
 })
@@ -45,10 +48,10 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="product-container__qty">
-                    Quantity <input type="text" value="1">
+                    Quantity: <input type="number" v-model="qty">
                 </div>
                 <div class="product-container__add-to-cart">
-                    <button class="green-button">Add to Cart</button>
+                    <button class="green-button" type="button" @click.prevent="cart.addToCart(product.data.sku, qty)">Add to Cart</button>
                 </div>
                 <div class="product-container__actions">
                     <a href="#">Add to wishlist</a>

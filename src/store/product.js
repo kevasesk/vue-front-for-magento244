@@ -23,8 +23,6 @@ export const useProductStore = defineStore('product', {
                 this.data = response.data.products.items[0];
                 const page = usePageStore();
                 page.setTitle(this.data.name);
-                console.log(response);//ysemenov
-                console.log(this.data);//ysemenov
             });
 
         },
