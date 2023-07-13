@@ -168,3 +168,53 @@
     justify-self: end;
 }
 
+
+/* Shipping-methods */
+.shipping-methods{
+    margin-top: 46px;
+}
+.shipping-methods__items{
+    border-top: 1px solid var(--light-grey);
+    margin-top: 40px;
+}
+.shipping-methods__item{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 1px solid var(--grey);
+    width: 445px;
+}
+.shipping-methods__item-price{
+    margin-left: 15px;
+}
+.shipping-methods__item-radio{
+    width: 20px;
+    height: 20px;
+}
+
+/* Payments-methods */
+.payment-methods{
+    margin-top: 46px;
+}
+.payment-methods__items{
+    border-top: 1px solid var(--light-grey);
+    margin-top: 40px;
+}
+.payment-methods__item{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 1px solid var(--grey);
+    width: 445px;
+}
+.payment-methods__item-price{
+    margin-left: 15px;
+}
+.payment-methods__item-radio{
+    width: 20px;
+    height: 20px;
+}

@@ -84,13 +84,20 @@ import SummaryProductImage from '@/assets/images/summary_product_image.png';
                         <h3 class="shipping-methods__title">Shipping Methods</h3>
                         <div class="shipping-methods__items">
                             <div class="shipping-methods__item">
-                                <input class="shipping-methods__item-checkbox" type="checkbox"/>
-                                <span class="shipping-methods__item-price">$ 5.00</span>
+                                <span class="shipping-methods__item-input">
+                                    <input class="shipping-methods__item-radio" type="radio" name="shipping"/>
+                                    <span class="shipping-methods__item-price">$5.00</span>
+                                </span>
                                 <span class="shipping-methods__item-name">Fixed</span>
-
-                                <input class="shipping-methods__item-checkbox" type="checkbox"/>
-                                <span class="shipping-methods__item-price">$ 15.00</span>
+                                <span class="shipping-methods__item-type">Flat rate</span>
+                            </div>
+                            <div class="shipping-methods__item">
+                                <span class="shipping-methods__item-input">
+                                    <input class="shipping-methods__item-radio" type="radio" name="shipping"/>
+                                    <span class="shipping-methods__item-price">$15.00</span>
+                                </span>
                                 <span class="shipping-methods__item-name">Not Fixed</span>
+                                <span class="shipping-methods__item-type">Flat rate</span>
                             </div>
                         </div>
                     </section>
@@ -98,12 +105,17 @@ import SummaryProductImage from '@/assets/images/summary_product_image.png';
                         <h3 class="payment-methods__title">Payment Methods</h3>
                         <div class="payment-methods__items">
                             <div class="payment-methods__item">
-                                <input class="payment-methods__item-checkbox" type="checkbox"/>
-                                <span class="payment-methods__item-price">$ 5.00</span>
+                                <span class="shipping-methods__item-input">
+                                    <input class="payment-methods__item-radio" type="radio" name="payment"/>
+                                    <span class="payment-methods__item-price">$5.00</span>
+                                </span>
                                 <span class="payment-methods__item-name">Check / Money order</span>
-
-                                <input class="payment-methods__item-checkbox" type="checkbox"/>
-                                <span class="payment-methods__item-price">$ 15.00</span>
+                            </div>
+                            <div class="payment-methods__item">
+                                 <span class="shipping-methods__item-input">
+                                     <input class="payment-methods__item-radio" type="radio" name="payment"/>
+                                     <span class="payment-methods__item-price">$ 15.00</span>
+                                 </span>
                                 <span class="payment-methods__item-name">Not Check / Money order</span>
                             </div>
                         </div>
