@@ -12,7 +12,6 @@ onMounted(() => {
 </script>
 <template>
     <div class="container">
-        {{ cart.data }}
         <div class="cart-container">
             <div class="products-container">
                 <div class="products-grid">

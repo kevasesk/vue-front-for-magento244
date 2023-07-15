@@ -203,10 +203,9 @@
     margin-top: 40px;
 }
 .payment-methods__item{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    display: flex;
+    gap: 15px;
     align-items: center;
-    justify-content: space-between;
     height: 64px;
     border-bottom: 1px solid var(--grey);
     width: 445px;
@@ -217,4 +216,11 @@
 .payment-methods__item-radio{
     width: 20px;
     height: 20px;
+}
+
+
+.checkout-actions__wrapper{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
 }

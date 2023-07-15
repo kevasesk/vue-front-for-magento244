@@ -23,6 +23,7 @@ ul{
     color: white;
     padding: 10px 15px;
     border: 0;
+    cursor: pointer;
 }
 .router-link-active{
     color: var(--green);

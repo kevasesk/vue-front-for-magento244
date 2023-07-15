@@ -13,6 +13,18 @@ export const GET_CART_ITEMS = gql`
                 code
                 title
             }
+            shipping_addresses{
+                available_shipping_methods {
+                    carrier_code
+                    method_code
+                    carrier_title
+                    method_title
+                    amount {
+                        currency
+                        value
+                    }
+                }
+            }
             total_quantity
             prices{
                 grand_total{
@@ -77,6 +89,158 @@ export const ADD_SIMPLE_TO_CART = gql`
                         name
                     }
                 }
+            }
+        }
+    }
+`;
+
+export const SET_SHIPPING_ADDRESS = gql`
+    mutation SET_SHIPPING_ADDRESS(
+        $cartId: String!,
+        $firstname: String!,
+        $lastname: String!,
+        $street: [String]!,
+        $city: String!,
+        $region: String!,
+        $postcode: String!,
+        $countryCode: String!,
+        $telephone: String!
+    ) {
+        setShippingAddressesOnCart(
+            input: {
+                cart_id: $cartId
+                shipping_addresses: [
+                    {
+                        address: {
+                            firstname: $firstname
+                            lastname: $lastname
+                            street: $street
+                            city: $city
+                            region: $region
+                            postcode: $postcode
+                            country_code: $countryCode
+                            telephone: $telephone
+                        }
+                    }
+                ]
+            }
+        ) {
+            cart {
+                id
+            }
+        }
+    }
+`;
+export const SET_BILLING_ADDRESS = gql`
+    mutation SET_BILLING_ADDRESS(
+        $cartId: String!,
+        $firstname: String!,
+        $lastname: String!,
+        $street: [String]!,
+        $city: String!,
+        $region: String!,
+        $postcode: String!,
+        $countryCode: String!,
+        $telephone: String!
+    ) {
+        setBillingAddressOnCart(
+            input: {
+                cart_id: $cartId
+                billing_address: {
+                    same_as_shipping: true,
+                    address: {
+                        firstname: $firstname
+                        lastname: $lastname
+                        street: $street
+                        city: $city
+                        region: $region
+                        postcode: $postcode
+                        country_code: $countryCode
+                        telephone: $telephone
+                    }
+                }
+            }
+        ) {
+            cart {
+                id
+            }
+        }
+    }
+`;
+
+export const SET_GUEST_EMAIL = gql`
+    mutation SET_GUEST_EMAIL(
+        $cartId: String!,
+        $email: String!
+    ) {
+        setGuestEmailOnCart(
+            input: {
+                cart_id: $cartId,
+                email: $email
+            }
+        ){
+            cart{
+                id
+            }
+        }
+    }
+`;
+export const SET_SHIPPING = gql`
+    mutation SET_SHIPPING(
+        $cartId: String!,
+        $carrierCode: String!,
+        $methodCode: String!
+    ) {
+        setShippingMethodsOnCart(
+            input: {
+                cart_id: $cartId
+                shipping_methods: [
+                    {
+                        carrier_code: $carrierCode
+                        method_code: $methodCode
+                    }
+                ]
+            }
+        ){
+            cart{
+                id
+            }
+        }
+    }
+`;
+
+
+export const SET_PAYMENT = gql`
+    mutation SET_PAYMENT(
+        $cartId: String!,
+        $code: String!
+    ) {
+        setPaymentMethodOnCart(
+            input: {
+                cart_id: $cartId
+                payment_method: {
+                    code: $code
+                }
+            }
+        ){
+            cart{
+                id
+            }
+        }
+    }
+`;
+
+export const PLACE_ORDER = gql`
+    mutation PLACE_ORDER(
+        $cartId: String!
+    ) {
+        placeOrder(
+            input: {
+                cart_id: $cartId
+            }
+        ) {
+            order {
+                order_number
             }
         }
     }
