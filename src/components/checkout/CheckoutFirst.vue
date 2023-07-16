@@ -136,7 +136,8 @@ onMounted(() => {
                                     class="payment-methods__item-radio"
                                     type="radio"
                                     name="payment"
-                                    @click="cart.selected_payment = payment.code"
+                                    :value="payment.code"
+                                    v-model="cart.selected_payment"
                                 >
                                 <span class="payment-methods__item-name">{{ payment.title }}</span>
                             </div>

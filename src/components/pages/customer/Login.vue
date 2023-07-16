@@ -4,11 +4,6 @@ import { usePageStore } from '@/store/page'
 import { useCustomerStore } from '@/store/customer'
 import { useRouter } from 'vue-router';
 
-import ApolloClient from 'apollo-boost'
-
-import { GENERATE_CUSTOMER_TOKEN } from '@/graphql/customer'
-
-
 const page = usePageStore();
 page.setTitle('Customer Login');
 

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { usePageStore } from '@/store/page'
 import { useNotyStore } from '@/store/noty'
 import { useRouter } from 'vue-router';
+import { api } from '@/helpers/api'
 
 import {
     CREATE_CART,
@@ -16,8 +17,6 @@ import {
     SET_PAYMENT,
     PLACE_ORDER
 } from '@/graphql/cart'
-
-import ApolloClient from 'apollo-boost'
 
 const CART_TOKEN_NAME = 'cartToken';
 
@@ -47,18 +46,14 @@ export const useCartStore = defineStore('cart', {
     }),
     actions: {
         async initItems(){
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
             await this.getCartToken().then(async token => {
                 if (!token) {
                     this.noty.show('No cart token in localStorage. on init items', 'error');
                     return;
                 }
 
-                await apolloClient.query({
-                    query: GET_CART_ITEMS,
-                    variables: {
-                        cartId: token
-                    }
+                await api(GET_CART_ITEMS, {
+                    cartId: token
                 }).then(response => {
                     console.log(response.data.cart);//ysemenov
                     this.data = response.data.cart.items;
@@ -67,117 +62,88 @@ export const useCartStore = defineStore('cart', {
                     this.totals = response.data.cart.prices;
                 });
 
-                await apolloClient.query({
-                    query: COUNTRIES
-                }).then(response => {
+                await api(COUNTRIES).then(response => {
                     this.countries = response.data.countries;
                 });
             });
         },
         async addToCart(sku, qty) {
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
             let token = await this.getCartToken();
-            await apolloClient.mutate({
-                mutation: ADD_SIMPLE_TO_CART,
-                variables: {
-                    cartId: token,
-                    sku,
-                    qty
-                }
-            }).then(response => {
+            await api(ADD_SIMPLE_TO_CART, {
+                cartId: token,
+                sku,
+                qty
+            }, 'mutate').then(response => {
                 this.noty.show('Items added to cart', 'success');
             });
 
         },
         async setShippingAddress() {
             let token = localStorage.getItem(CART_TOKEN_NAME);
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: SET_SHIPPING_ADDRESS,
-                variables: {
-                    cartId: token,
-                    firstname: this.address.firstname,
-                    lastname: this.address.lastname,
-                    street: this.address.street,
-                    city: this.address.city,
-                    region: this.address.region,
-                    postcode: this.address.postcode,
-                    countryCode: this.address.country,
-                    telephone: this.address.telephone
-                }
-            }).then(response => {
+            await api(SET_SHIPPING_ADDRESS, {
+                cartId: token,
+                firstname: this.address.firstname,
+                lastname: this.address.lastname,
+                street: this.address.street,
+                city: this.address.city,
+                region: this.address.region,
+                postcode: this.address.postcode,
+                countryCode: this.address.country,
+                telephone: this.address.telephone
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
 
-            await apolloClient.mutate({
-                mutation: SET_BILLING_ADDRESS,
-                variables: {
-                    cartId: token,
-                    firstname: this.address.firstname,
-                    lastname: this.address.lastname,
-                    street: this.address.street,
-                    city: this.address.city,
-                    region: this.address.region,
-                    postcode: this.address.postcode,
-                    countryCode: this.address.country,
-                    telephone: this.address.telephone
-                }
-            }).then(response => {
+            await api(SET_BILLING_ADDRESS, {
+                cartId: token,
+                firstname: this.address.firstname,
+                lastname: this.address.lastname,
+                street: this.address.street,
+                city: this.address.city,
+                region: this.address.region,
+                postcode: this.address.postcode,
+                countryCode: this.address.country,
+                telephone: this.address.telephone
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
         },
         async setGuestEmail(){
             let token = localStorage.getItem(CART_TOKEN_NAME);
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: SET_GUEST_EMAIL,
-                variables: {
-                    cartId: token,
-                    email: this.email
-                }
-            }).then(response => {
+            await api(SET_GUEST_EMAIL, {
+                cartId: token,
+                email: this.email
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
         },
         async setShipping(){
             let token = localStorage.getItem(CART_TOKEN_NAME);
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: SET_SHIPPING,
-                variables: {
-                    cartId: token,
-                    carrierCode: this.selected_shipping_carrier,
-                    methodCode: this.selected_shipping_method
-                }
-            }).then(response => {
+            await api(SET_SHIPPING, {
+                cartId: token,
+                carrierCode: this.selected_shipping_carrier,
+                methodCode: this.selected_shipping_method
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
         },
         async setPayment(){
             let token = localStorage.getItem(CART_TOKEN_NAME);
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: SET_PAYMENT,
-                variables: {
-                    cartId: token,
-                    code: this.selected_payment
-                }
-            }).then(response => {
+            await api(SET_PAYMENT, {
+                cartId: token,
+                code: this.selected_payment
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
         },
         async placeOrder(){
             let token = localStorage.getItem(CART_TOKEN_NAME);
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: PLACE_ORDER,
-                variables: {
-                    cartId: token,
-                    // carrierCode: this.selected_shipping_carrier,
-                    // methodCode: this.selected_shipping_method,
-                    // paymentCode: this.selected_payment,
-                }
-            }).then(response => {
+            await api(PLACE_ORDER, {
+                cartId: token,
+                // carrierCode: this.selected_shipping_carrier,
+                // methodCode: this.selected_shipping_method,
+                // paymentCode: this.selected_payment,
+            }, 'mutate').then(response => {
                 console.log(response);//ysemenov
             });
         },
@@ -188,10 +154,7 @@ export const useCartStore = defineStore('cart', {
                 return token;
             }
 
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: CREATE_CART
-            }).then(response => {
+            await api(CREATE_CART, {}, 'mutate').then(response => {
                 if (response.data.createEmptyCart) {
                     localStorage.setItem(CART_TOKEN_NAME, response.data.createEmptyCart);
                     token = localStorage.getItem(CART_TOKEN_NAME);

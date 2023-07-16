@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import ApolloClient from 'apollo-boost'
 import { CREATE_CUSTOMER } from '@/graphql/customer'
 import { usePageStore } from '@/store/page'
 

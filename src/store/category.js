@@ -1,12 +1,9 @@
 import { defineStore } from 'pinia'
 import { usePageStore } from '@/store/page'
 import { useRouter } from 'vue-router';
+import { api } from '@/helpers/api'
 
 import { GET_CATEGORY, GET_CATEGORY_PRODUCT_LISTING } from '@/graphql/category'
-
-import ApolloClient from 'apollo-boost'
-import gql from 'graphql-tag'
-
 
 export const useCategoryStore = defineStore('category', {
     state: () => ({
@@ -26,31 +23,22 @@ export const useCategoryStore = defineStore('category', {
     }),
     actions: {
         async fetchProducts() {
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.query({
-                query: GET_CATEGORY_PRODUCT_LISTING,
-                variables: {
-                    categoryId: this.categoryId,
-                    currentPage: this.currentPage,
-                    pageSize: this.pageSize
-                }
+            await api(GET_CATEGORY_PRODUCT_LISTING, {
+                categoryId: this.categoryId,
+                currentPage: this.currentPage,
+                pageSize: this.pageSize
             }).then(response => {
                 this.products = response.data.products.items;
                 this.totalCount = response.data.products.total_count;
                 this.sorts = response.data.products.sort_fields.options;
                 this.filters = response.data.products.filters;
             });
-
         },
         async fetchCategory(categoryId) {
             const router = useRouter();
             try {
-                const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-                await apolloClient.query({
-                    query: GET_CATEGORY,
-                    variables: {
-                        categoryId
-                    }
+                await api(GET_CATEGORY, {
+                    categoryId
                 }).then(async (response) => {
                     const { category } = response.data;
                     this.categoryId = category.id;
@@ -61,7 +49,6 @@ export const useCategoryStore = defineStore('category', {
 
                     const page = usePageStore();
                     page.setTitle(this.title);
-
                 }).catch(error => {
                    // router.push({ name: 'NotFound' });
                 });

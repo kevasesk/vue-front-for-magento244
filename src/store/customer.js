@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useRouter } from "vue-router";
 import { useNotyStore } from '@/store/noty'
-import ApolloClient from 'apollo-boost'
+import { api } from '@/helpers/api'
 
 const TOKEN_NAME = 'customerToken';
 
@@ -17,18 +17,9 @@ export const useCustomerStore = defineStore('customer', {
     actions: {
         async subscribe(){
             let token = localStorage.getItem(TOKEN_NAME);
-            const apolloClient = new ApolloClient({
-                uri: '/api/graphql',
-                headers: {
-                    Authorization: "Bearer " + token,
-                }
-            });
-            await apolloClient.mutate({
-                mutation: SUBSCRIBE,
-                variables: {
-                    email: this.customer.email
-                }
-            }).then(async (response) => {
+            await api(SUBSCRIBE, {
+                email: this.customer.email
+            }, 'mutate').then(async (response) => {
                 console.log(response);//ysemenov
                 window.location.reload();
                 this.noty.show('Subscribed!', 'success');
@@ -45,14 +36,8 @@ export const useCustomerStore = defineStore('customer', {
         },
         async initCustomer(){
             let token = localStorage.getItem(TOKEN_NAME);
-            const apolloClient = new ApolloClient({
-                uri: '/api/graphql',
-                headers: {
-                    Authorization: "Bearer " + token,
-                }
-            });
-            await apolloClient.query({
-                query: CUSTOMER,
+            await api(CUSTOMER, {}, 'query', {
+                Authorization: "Bearer " + token,
             }).then(async (response) => {
                 this.customer = response.data.customer;
             }).catch(error => {
@@ -61,14 +46,10 @@ export const useCustomerStore = defineStore('customer', {
             });
         },
         async login(email, password){
-            const apolloClient = new ApolloClient({ uri: '/api/graphql' });
-            await apolloClient.mutate({
-                mutation: GENERATE_CUSTOMER_TOKEN,
-                variables: {
-                    email,
-                    password
-                }
-            }).then(async (response) => {
+            await api(GENERATE_CUSTOMER_TOKEN, {
+                email,
+                password
+            }, 'mutate').then(async (response) => {
                 this.noty.show('Logged in!', 'success');
                 let token = response.data.generateCustomerToken.token;
                 localStorage.setItem(TOKEN_NAME, token);
