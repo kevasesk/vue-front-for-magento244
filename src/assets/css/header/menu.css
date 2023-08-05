@@ -13,6 +13,7 @@
 .menu li {
     float: left;
     margin-right: 40px;
+    border-bottom: 2px transparent solid;
 }
 .menu li:hover {
     border-bottom: 2px var(--green) solid;

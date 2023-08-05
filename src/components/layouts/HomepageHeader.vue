@@ -2,6 +2,8 @@
 
 //Components
 import Menu from '@/components/layouts/header/Menu.vue'
+import Socials from '@/components/layouts/homepage/Socials.vue'
+import Slider from '@/components/layouts/homepage/Slider.vue'
 
 // Icons
 import SearchIcon from '@/assets/images/search.svg';
@@ -18,7 +20,7 @@ const customer = useCustomerStore();
 const route = useRoute();
 </script>
 <template>
-    <header v-show="route.name != 'homepage'">
+    <header class="homepage-container" v-show="route.name == 'homepage'">
         <div class="container">
             <div class="header-top">
                 <div class="search-form">
@@ -49,6 +51,10 @@ const route = useRoute();
                 </div>
             </div>
             <Menu/>
+            <div class="homepage-slider-container">
+                <Socials/>
+                <Slider/>
+            </div>
         </div>
     </header>
 </template>

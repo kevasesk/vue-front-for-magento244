@@ -1,3 +1,107 @@
 .home-container{
     min-height: 500px;
 }
+.homepage-container{
+    min-height: 700px;
+    background-image: url("/src/assets/images/homepage/homepage_header.png");
+}
+.homepage-slider{
+    margin-left: 170px;
+}
+.homepage-slider-container{
+    display: flex;
+    min-height: calc(700px - 170px);
+    align-items: center;
+}
+.homepage__social-link{
+    margin-top: 22px;
+}
+.slide{
+    display: flex;
+    align-items: center;
+}
+.slide__header{
+    font-size: 34px;
+}
+.slide__column{
+    width: 275px;
+}
+.slide__action{
+    margin-top: 40px;
+}
+.slider-nav{
+    display: flex;
+    gap: 10px;
+}
+.slider-nav__item{
+    background-color: #515151;
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+}
+.slider-nav__item-active{
+    background-color: var(--green);
+}
+
+.home-blocks{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.home-block{
+    margin-top: 60px;
+    width: 606px;
+}
+.home-block__link{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.home-block__discount{
+    border: 1px solid var(--light-grey-2);
+    padding: 85px 40px;
+    width: calc(606px - 80px);
+}
+.discount__form input{
+    margin-top: 45px;
+    border-radius: 25px;
+    padding: 0 25px;
+    border: 1px solid var(--light-grey-2);
+    height: 50px;
+    width: 315px;
+}
+.discount__form .email-icon {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    right: 30px;
+    top: 3px;
+    color: var(--green);
+}
+/*Subscribe*/
+.home-subscribe{
+    margin-top: 65px;
+    padding: 42px 112px;
+    background-color: var(--green-transparent);
+    display: grid;
+    grid-template-columns: 530px 530px;
+    align-items: center;
+    justify-items: center;
+}
+.home-subscribe__form input{
+    height: 50px;
+    width: 340px;
+    border-radius: 25px;
+    padding: 0 25px;
+    border: 1px solid var(--light-grey-2);
+}
+.home-subscribe__form .email-icon {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    right: 30px;
+    top: 3px;
+    color: var(--green);
+}
