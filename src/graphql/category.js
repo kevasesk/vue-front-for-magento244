@@ -70,3 +70,26 @@ export const GET_CATEGORY_PRODUCT_LISTING = gql`
         }
     }
 `;
+
+export const GET_ATTRIBUTES_META_DATA = gql`
+    query GetAttributesMetaData {
+        customAttributeMetadata(attributes: [
+            {
+                attribute_code: "color",
+                entity_type: "catalog_product"
+            },
+            {
+                attribute_code: "manufacturer",
+                entity_type: "catalog_product"
+            },
+        ]) {
+            items{
+                attribute_code
+                attribute_options{
+                    label
+                    value
+                }
+            }
+        }
+    }
+`;

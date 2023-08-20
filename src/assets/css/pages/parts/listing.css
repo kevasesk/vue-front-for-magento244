@@ -44,7 +44,12 @@
 .sort-direction {
     padding: 10px;
 }
+.sort-desc{
+    transform: rotate(180deg);
+}
+.sort-asc{
 
+}
 
 .product-list-grid{
     margin-top: 17px;
@@ -75,5 +80,20 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: end;
+    justify-content: space-between;
+}
+.pages{
+    display: flex;
+    gap: 10px;
+}
+.pages__list{
+    display: flex;
+    gap: 5px;
+}
+.pages__item-active a {
+    color: var(--green);
+}
+.pages-show{
+    display: flex;
+    gap: 7px;
 }

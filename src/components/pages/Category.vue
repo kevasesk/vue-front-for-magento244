@@ -12,6 +12,7 @@ const route = useRoute();
 const category = useCategoryStore()
 onMounted(() => {
     category.fetchCategory(route.params.id)
+    category.fetchAttributes()
 })
 </script>
 <template>

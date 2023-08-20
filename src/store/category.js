@@ -3,7 +3,7 @@ import { usePageStore } from '@/store/page'
 import { useRouter } from 'vue-router';
 import { api } from '@/helpers/api'
 
-import { GET_CATEGORY, GET_CATEGORY_PRODUCT_LISTING } from '@/graphql/category'
+import { GET_CATEGORY, GET_CATEGORY_PRODUCT_LISTING, GET_ATTRIBUTES_META_DATA } from '@/graphql/category'
 
 export const useCategoryStore = defineStore('category', {
     state: () => ({
@@ -13,7 +13,9 @@ export const useCategoryStore = defineStore('category', {
         path: '',
         image: '',
         products: null,
+        attributes: [],
         sorts: null,
+        sortDirection: 'desc',
         filters: null,
         activeFilters: [],
         viewType: 'grid',
@@ -22,6 +24,11 @@ export const useCategoryStore = defineStore('category', {
         pageSize: 3,
     }),
     actions: {
+        async fetchAttributes() {
+            await api(GET_ATTRIBUTES_META_DATA).then(response => {
+                this.attributes = response.data.customAttributeMetadata.items;
+            });
+        },
         async fetchProducts() {
             await api(GET_CATEGORY_PRODUCT_LISTING, {
                 categoryId: this.categoryId,
@@ -59,6 +66,10 @@ export const useCategoryStore = defineStore('category', {
             }
         },
 
+        getAttributeValue(attributeCode, attributeValue){
+            let attribute = this.attributes.find(attribute => attribute.attribute_code === attributeCode);
+            return attribute.attribute_options.find(option => option.value == attributeValue)?.label;
+        },
         isActive(filter) {
             return this.activeFilters.find(activeFilter => activeFilter.request_var === filter.request_var);
         },
@@ -71,6 +82,14 @@ export const useCategoryStore = defineStore('category', {
                 this.activeFilters.push(filter);
             }
         },
-
+        itemsFrom(){
+            return (this.currentPage - 1) * this.pageSize + 1;
+        },
+        itemsTo(){
+            return this.currentPage * this.pageSize;
+        },
+        switchSortDirection(){
+            this.sortDirection = this.sortDirection === 'asc' ? this.sortDirection = 'desc': this.sortDirection = 'asc';
+        }
     },
 })

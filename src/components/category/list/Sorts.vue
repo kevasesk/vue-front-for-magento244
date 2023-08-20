@@ -11,14 +11,19 @@ const category = useCategoryStore()
         <div class="sorts-container-left">
             <img class="view" :class="{ active: category.viewType === 'grid'}" :src="GridView" @click="category.viewType = 'grid'"/>
             <img class="view" :class="{ active: category.viewType === 'list'}" :src="ListView" @click="category.viewType = 'list'"/>
-            <div class="items-count small-text">Items 1-9 of {{category?.totalCount}}</div>
+            <div class="items-count small-text">
+                Items {{category.itemsFrom() }}-{{category.itemsTo() }} of {{category?.totalCount}}</div>
+
         </div>
         <div class="sorts-container-right">
             <div class="sort-text small-text">Sort By</div>
             <select name="sort" class="list-select">
                 <option :value="sort.value" v-for="sort in category.sorts">{{sort.label}}</option>
             </select>
-            <img class="sort-direction" :src="ArrowUp"/>
+            <img class="sort-direction" :src="ArrowUp" :class="{
+                'sort-asc': category.sortDirection == 'asc',
+                'sort-desc': category.sortDirection == 'desc'
+            }" @click="category.switchSortDirection()"/>
         </div>
     </div>
 </template>

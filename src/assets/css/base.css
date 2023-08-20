@@ -76,3 +76,6 @@ a {
 a:hover {
     color: var(--green);
 }
+.hidden{
+    visibility: hidden;
+}
