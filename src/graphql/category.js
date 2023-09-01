@@ -17,11 +17,25 @@ export const GET_CATEGORY = gql`
 `;
 
 export const GET_CATEGORY_PRODUCT_LISTING = gql`
-    query GetCategoryProductListing($categoryId: String, $currentPage: Int, $pageSize: Int){
+    query GetCategoryProductListing(
+        $categoryId: String,
+        $colorOptions: [String],
+        $minPrice: String,
+        $maxPrice: String,
+        $currentPage: Int,
+        $pageSize: Int
+    ){
         products(
             filter: {
                 category_id: {
                     eq: $categoryId
+                },
+                color: {
+                    in: $colorOptions
+                },
+                price: {
+                    from: $minPrice,
+                    to: $maxPrice
                 }
             },
             currentPage: $currentPage

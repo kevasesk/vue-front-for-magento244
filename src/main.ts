@@ -64,11 +64,16 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-const app = createApp(App)
-app.use(router)
-app.use(createPinia())
-app.mount('#app')
 
+
+const app = createApp(App)
+const pinia = createPinia();
+app.config.errorHandler = (err, instance, info) => {
+   console.error(err, instance, info);//ysemenov
+}
+app.use(router)
+app.use(pinia)
+app.mount('#app')
 /*
 plan
 - display data on existing pages
