@@ -1,5 +1,13 @@
+@import './parts/tabs.css';
+
 .product-breadcrumbs{
     margin-top: 25px;
+}
+.product-breadcrumbs__link{
+    color: var(--black);
+}
+.product-breadcrumbs__link-active{
+    color: var(--grey);
 }
 .product-container{
     margin-top: 40px;

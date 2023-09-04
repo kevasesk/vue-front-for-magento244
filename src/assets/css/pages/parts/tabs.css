@@ -1,0 +1,29 @@
+@import './reviews.css';
+
+.product-tabs{
+    display: grid;
+    margin-top: 92px;
+}
+.product-tab{
+    display: flex;
+    align-content: center;
+}
+.product-tab{
+    border: 1px solid var(--light-grey);
+    display: grid;
+}
+.product-tab__icon{
+    margin: 15px;
+}
+.product-tab__title{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.product-tab__title-active{
+    background-color: #F5F5F5;
+}
+.product-tab__content{
+    padding: 20px 45px;
+}
+

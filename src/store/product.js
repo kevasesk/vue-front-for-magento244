@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { usePageStore } from '@/store/page'
 import { useRouter } from 'vue-router';
 
-import { GET_PRODUCT } from '@/graphql/product'
+import { GET_PRODUCT, CREATE_REVIEW } from '@/graphql/product'
 
 import { api } from '@/helpers/api'
 import gql from 'graphql-tag'

@@ -1,0 +1,59 @@
+.review__comment{
+    margin-top: 40px;
+}
+.review__list{
+    display: grid;
+}
+.review__item{
+    display: grid;
+    border-bottom: 1px solid var(--light-grey);
+}
+.review__meta{
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+.review__item-title{
+    display: flex;
+}
+.review__summary{
+    margin-top: 20px;
+}
+.review__stars{
+    margin-left: 20px;
+}
+.review__stars img{
+    height: 20px;
+    width: 20px;
+}
+.review__item-wrapper{
+    margin-bottom: 30px;
+}
+.review__form{
+    margin-top: 25px;
+}
+.review__form-rating-title{
+    margin-top: 25px;
+}
+.review__stars-input img{
+    margin-right: 5px;
+}
+.review__form-elements{
+    display: grid;
+    width: 500px;
+}
+.review__form-elements label{
+    margin-top: 20px;
+}
+.review__form-elements input{
+    height: 40px;
+    border: 1px solid var(--light-grey);
+    padding: 5px 10px;
+}
+.review__form-elements textarea{
+    border: 1px solid var(--light-grey);
+}
+.review__form-actions{
+    margin-top: 25px;
+}
+

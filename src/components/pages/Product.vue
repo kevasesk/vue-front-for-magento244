@@ -5,9 +5,13 @@ import {useCartStore} from "@/store/cart";
 import {onMounted, ref} from "vue";
 
 import Breadcrumbs from '@/components/product/Breadcrumbs.vue'
+import Reviews from '@/components/product/Reviews.vue'
 
 import ProductImage from '@/assets/images/product_main_image.png';
 import ProductImagePreview from '@/assets/images/product_image_preview.png';
+
+import TabPlus from '@/assets/images/product/tabs/plus.png';
+import CrossPlus from '@/assets/images/product/tabs/cross.png';
 
 const route = useRoute();
 const product = useProductStore()
@@ -57,7 +61,31 @@ onMounted(() => {
                     <a href="#">Add to wishlist</a>
                 </div>
             </div>
-            {{product.data}}
+<!--            {{product.data}}-->
         </div>
+        <section class="product-tabs">
+            <div class="product-tab">
+                <div class="product-tab__title">
+                    <img class="product-tab__icon" :src="TabPlus"/>
+                    <span><b>Details</b></span>
+                </div>
+                <div class="product-tab__content">Content</div>
+            </div>
+            <div class="product-tab">
+                <div class="product-tab__title">
+                    <img class="product-tab__icon" :src="TabPlus"/>
+                    <span><b>Sizes</b></span>
+                </div>
+                <div class="product-tab__content">Content</div>
+            </div>
+            <div class="product-tab">
+                <div class="product-tab__title">
+                    <img class="product-tab__icon" :src="TabPlus"/>
+                    <span><b>Description</b></span>
+                </div>
+                <div class="product-tab__content">Content</div>
+            </div>
+            <Reviews/>
+        </section>
     </div>
 </template>

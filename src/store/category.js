@@ -40,6 +40,7 @@ export const useCategoryStore = defineStore('category', {
                 console.log(this.activeFilters);//ysemenov
 
                 const filters = this.collectFilter();
+                //TODO fix filters when zero products filtered.
 
                 console.log(filters);//ysemenov
                 await api(GET_CATEGORY_PRODUCT_LISTING, {
