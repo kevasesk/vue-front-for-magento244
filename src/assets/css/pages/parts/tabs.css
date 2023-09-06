@@ -13,13 +13,19 @@
     display: grid;
 }
 .product-tab__icon{
-    margin: 15px;
+    padding: 15px;
+}
+.product-tab__text{
+    padding: 15px 0;
 }
 .product-tab__title{
     height: 60px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 60px 1fr;
     align-items: center;
+    cursor: pointer;
 }
+
 .product-tab__title-active{
     background-color: #F5F5F5;
 }

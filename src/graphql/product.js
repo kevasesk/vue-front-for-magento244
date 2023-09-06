@@ -47,23 +47,23 @@ export const GET_PRODUCT = gql`
 `;
 
 export const CREATE_REVIEW = gql`
-    mutation CreateReview($nickname: String, $ratingValue: Int!, $title: String!, $detail: String!, $productId: String!) {
+    mutation CreateReview($nickname: String!, $summary: String!, $text: String!, $sku: String!) {
         createProductReview(
             input: {
-                nickname: $nickname
+                nickname: $nickname,
+                summary: $summary,
+                text: $text,
+                sku: $sku,
                 ratings: [
-                    {
-                        rating_name: "Rating"
-                        value: $ratingValue
-                    }
+                    { id: "MQ==", value_id: "NQ==" },
                 ]
-                title: $title
-                detail: $detail
-                entity_pk_value: $productId # Use the product's ID or SKU here
             }
         ) {
             review {
-                review_id
+                nickname
+                summary
+                text
+                created_at
             }
         }
     }

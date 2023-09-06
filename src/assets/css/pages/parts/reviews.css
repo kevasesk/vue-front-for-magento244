@@ -49,9 +49,12 @@
     height: 40px;
     border: 1px solid var(--light-grey);
     padding: 5px 10px;
+    border-radius: 1px;
 }
 .review__form-elements textarea{
     border: 1px solid var(--light-grey);
+    padding: 10px 15px;
+    border-radius: 1px;
 }
 .review__form-actions{
     margin-top: 25px;
