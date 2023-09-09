@@ -34,6 +34,7 @@ export const useProductStore = defineStore('product', {
             nickname: '',
             summary: '',
             review: '',
+            rating: '',
         }
     }),
     actions: {
@@ -49,16 +50,28 @@ export const useProductStore = defineStore('product', {
         getTabAttribute(key) {
             return this.currentProduct[key].html || '';
         },
+        formatDate(originalDateString){
+            const date = new Date(originalDateString);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const reformattedDateString = `${month}/${day}/${year.toString().slice(-2)}`;
+
+            return reformattedDateString;
+        },
         async addReview(event){
             event.preventDefault();
-            const { nickname, summary, review } = this.reviewForm;
+            const { nickname, summary, review, rating } = this.reviewForm;
             await api(CREATE_REVIEW, {
                 nickname: nickname,
-                //ratingValue: 3,//TODO stars
+                ratingValue: rating,
                 summary: summary,
                 text: review,
                 sku: this.currentProduct.sku
             }, 'mutate').then(async (response) => {
+                this.reviewForm.nickname = '';
+                this.reviewForm.summary = '';
+                this.reviewForm.review = '';
                 console.log(response);//ysemenov
                // window.location.reload();
                 this.noty.show('Review created!', 'success');

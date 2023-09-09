@@ -1,88 +1,59 @@
 <script setup>
 import {useProductStore} from "@/store/product";
+import {ref} from 'vue';
 
 import Star from '@/assets/images/star.svg';
 import StarActive from '@/assets/images/star_active.svg';
 
-import StarInput from '@/assets/images/product/tabs/star_input.svg';
+import StarInput from '@/assets/images/star.svg';
+import StarActiveInput from '@/assets/images/star_active.svg';
 
 const product = useProductStore()
+const starImages = ref([
+    StarInput,
+    StarInput,
+    StarInput,
+    StarInput,
+    StarInput
+]);
+function starRatingHandler(event){
+    const clickedKey = parseInt(event.target.getAttribute('data-key'));
+    product.reviewForm.rating = btoa(clickedKey + 1);
+
+    const images = [...starImages.value];
+    for (let i = 0; i <= clickedKey; i++) {
+        images[i] = StarActiveInput;
+    }
+    for (let i = clickedKey + 1; i < starImages.value.length; i++) {
+        images[i] = StarInput;
+    }
+    starImages.value = images;
+}
 </script>
 <template>
     <h2 class="review__title">Customer Reviews</h2>
     <div class="review__list">
-        <div class="review__item">
-            <div class="review__comment">As an ocean lifeguard, I've used
-                several types of lower grade binos
-                in the past and eventually just gave up on using
-                binos all together because they would always have issues.
-            </div>
+        <div class="review__item" v-for="review in product.currentProduct.reviews.items">
+            <div class="review__comment">{{review.summary}}</div>
             <div class="review__meta">
                 <div class="review__item-title">
                     <span>Rating</span>
                     <div class="review__stars">
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="Star"/>
-                        <img :src="Star"/>
+                        <img :src="review.average_rating >= 20 ? StarActive : Star"/>
+                        <img :src="review.average_rating >= 40 ? StarActive : Star"/>
+                        <img :src="review.average_rating >= 60 ? StarActive : Star"/>
+                        <img :src="review.average_rating >= 80 ? StarActive : Star"/>
+                        <img :src="review.average_rating >= 100 ? StarActive : Star"/>
                     </div>
                 </div>
                 <div class="review__item-wrapper">
                     <div class="review__text">
-                        Rides up a bit during workouts but otherwise it's pretty comfy! I like the hood.
+                        {{review.text}}
                     </div>
                     <div class="review__summary tiny-text">
-                        <span class="review__nickname">Review by Gala</span>
-                        <span class="review__created_at">3/25/19</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="review__item">
-            <div class="review__comment">Rides up during workouts</div>
-            <div class="review__meta">
-                <div class="review__item-title">
-                    <span>Rating</span>
-                    <div class="review__stars">
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="Star"/>
-                        <img :src="Star"/>
-                    </div>
-                </div>
-                <div class="review__item-wrapper">
-                    <div class="review__text">
-                        Rides up a bit during workouts but otherwise it's pretty comfy! I like the hood.
-                    </div>
-                    <div class="review__summary tiny-text">
-                        <span class="review__nickname">Review by Gala</span>
-                        <span class="review__created_at">3/25/19</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="review__item">
-            <div class="review__comment">Rides up during workouts</div>
-            <div class="review__meta">
-                <div class="review__item-title">
-                    <span>Rating</span>
-                    <div class="review__stars">
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="StarActive"/>
-                        <img :src="Star"/>
-                        <img :src="Star"/>
-                    </div>
-                </div>
-                <div class="review__item-wrapper">
-                    <div class="review__text">
-                        Rides up a bit during workouts but otherwise it's pretty comfy! I like the hood.
-                    </div>
-                    <div class="review__summary tiny-text">
-                        <span class="review__nickname">Review by Gala</span>
-                        <span class="review__created_at">3/25/19</span>
+                        <span class="review__nickname">Review by {{review.nickname}}&nbsp</span>
+                        <span class="review__created_at">{{product.formatDate(review.created_at)}}</span><!--TODO format date-->
+
                     </div>
                 </div>
             </div>
@@ -93,11 +64,13 @@ const product = useProductStore()
         <h3 class="review__product-name">Mona Pullover Hoodlie</h3>
         <h4 class="review__form-rating-title">Your Rating  *</h4>
         <div class="review__stars-input">
-            <img :src="StarInput"/>
-            <img :src="StarInput"/>
-            <img :src="StarInput"/>
-            <img :src="StarInput"/>
-            <img :src="StarInput"/>
+            <img
+                :src="starImages[star]"
+                v-for="star in [0,1,2,3,4]"
+                :key="star"
+                :data-key="star"
+                @click="starRatingHandler($event)"
+            />
         </div>
         <div class="review__form-elements">
             <label>Nickname <span class="required">*</span></label>
