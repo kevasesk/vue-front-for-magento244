@@ -5,10 +5,8 @@ import {useCartStore} from "@/store/cart";
 import {onMounted, ref} from "vue";
 
 import Breadcrumbs from '@/components/product/Breadcrumbs.vue'
+import Gallery from '@/components/product/Gallery.vue'
 import Tabs from '@/components/product/Tabs.vue'
-
-import ProductImage from '@/assets/images/product_main_image.png';
-import ProductImagePreview from '@/assets/images/product_image_preview.png';
 
 const route = useRoute();
 const product = useProductStore()
@@ -22,13 +20,7 @@ onMounted(() => {
     <div class="container">
         <Breadcrumbs/>
         <div class="product-container" v-if="product.currentProduct">
-            <div class="product-container__gallery">
-                <img :src="ProductImage"/>
-                <img class="preview-image" :src="ProductImagePreview"/>
-                <img class="preview-image" :src="ProductImagePreview"/>
-                <img class="preview-image" :src="ProductImagePreview"/>
-                <!--<img class="preview-image" :src="product.data.image.url"/>-->
-            </div>
+            <Gallery />
             <div class="product-container__short-info">
                 <h2>{{product.currentProduct.name}}</h2>
                 <div class="product-container__reviews">

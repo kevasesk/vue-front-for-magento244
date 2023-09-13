@@ -1,0 +1,29 @@
+.product-container__gallery .preview-image{
+    margin: 10px 10px 0px 0px;
+}
+.gallery-main{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    width: 700px;
+}
+.product-container__actions-right{
+    position: absolute;
+    top: calc(50% - 22px);
+    right: 30px;
+    cursor: pointer;
+}
+.product-container__actions-left{
+    position: absolute;
+    top: calc(50% - 22px);
+    transform: rotate(180deg);
+    left: 30px;
+    cursor: pointer;
+}
+.preview-image{
+    cursor: pointer;
+    height: 110px;
+    width: 90px;
+}

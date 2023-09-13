@@ -16,6 +16,9 @@ export const GET_PRODUCT = gql`
                 image{
                     url
                 }
+                media_gallery{
+                    url
+                }
                 description {
                     html
                 }
