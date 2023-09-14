@@ -59,6 +59,9 @@ export const useProductStore = defineStore('product', {
 
             return reformattedDateString;
         },
+        goToReview(){
+            this.activeTabs['reviews'] = true;
+        },
         async addReview(event){
             event.preventDefault();
             const { nickname, summary, review, rating } = this.reviewForm;

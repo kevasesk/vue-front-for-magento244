@@ -31,6 +31,8 @@ export const GET_PRODUCT = gql`
                         }
                     }
                 }
+                rating_summary
+                review_count
                 reviews(pageSize: 10) {
                     items {
                         summary

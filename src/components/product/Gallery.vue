@@ -26,7 +26,7 @@ function changePreview(index){
 }
 </script>
 <template>
-    <div class="product-container__gallery">
+    <div class="product-container__gallery" v-if="product.currentProduct.media_gallery">
         <div class="gallery-main">
             <img :src="GalleryArrow" class="product-container__actions-left" @click="left"/>
             <img :src="GalleryArrow" class="product-container__actions-right" @click="right"/>

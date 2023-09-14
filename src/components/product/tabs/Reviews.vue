@@ -31,7 +31,7 @@ function starRatingHandler(event){
 }
 </script>
 <template>
-    <h2 class="review__title">Customer Reviews</h2>
+    <h2 class="review__title" id="review-list">Customer Reviews</h2>
     <div class="review__list">
         <div class="review__item" v-for="review in product.currentProduct.reviews.items">
             <div class="review__comment">{{review.summary}}</div>
@@ -59,7 +59,7 @@ function starRatingHandler(event){
             </div>
         </div>
     </div>
-    <form class="review__form" @submit="product.addReview">
+    <form class="review__form" @submit="product.addReview" id="review-form">
         <h4>You're reviewing:</h4>
         <h3 class="review__product-name">Mona Pullover Hoodlie</h3>
         <h4 class="review__form-rating-title">Your Rating  *</h4>

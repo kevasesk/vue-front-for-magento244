@@ -13,10 +13,103 @@
 .product-container{
     margin-top: 40px;
     display: grid;
-    grid-template-columns: 700px 500px;
+    grid-template-columns: 700px 400px;
     grid-gap: 33px;
 }
-
+.product-container__price{
+    color: #212121;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
 .product-container__price-stock{
+    margin-top: 25px;
     display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.product-container__price-stock .grid-right{
+    justify-self: end;
+}
+.product-container__reviews{
+    margin-top: 10px;
+}
+.product-container__reviews-count{
+    margin-left:10px;
+    border-bottom: 1px solid var(--grey);
+    color: var(--grey);
+}
+.product-container__reviews-link{
+    margin-left:20px;
+    border-bottom: 1px solid var(--grey);
+    color: var(--grey);
+    cursor: pointer;
+}
+.product-container__as-low{
+    color: var(--grey);
+}
+.product-container__stock-icon{
+    display: inline-block;
+}
+.product-container__stock-text{
+    margin-left: 10px;
+
+    color: #212121;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.product-container__stock-icon-in-stock{
+    width: 10px;
+    height: 10px;
+    background-color: #83D367;
+    border-radius: 50%;
+}
+.product-container__stock-icon-out-of-stock{
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+.product-container__qty{
+    padding-top: 20px;
+    border-top: 1px solid var(--grey);
+}
+.product-container__qty button{
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: white;
+}
+.product-container__button-minus{
+    border: #212121 solid 1px;
+    border-right: 0;
+}
+.product-container__button-plus{
+    border: #212121 solid 1px;
+    border-left: 0;
+}
+.product-container__qty input{
+    height: 33px;
+    width: 35px;
+    text-align: center;
+    border: #212121 solid 1px;
+    border-left: 0;
+    border-right: 0;
+    outline: none;
+}
+.product-container__add-to-cart{
+    margin-top: 25px;
+}
+.product-container__add-to-cart button{
+    height: 50px;
+    width: 174px;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 138.687%;
 }
