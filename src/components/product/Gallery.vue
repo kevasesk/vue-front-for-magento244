@@ -3,6 +3,7 @@ import {useProductStore} from "@/store/product";
 import {ref} from "vue";
 
 import GalleryArrow  from '@/assets/images/product/gallery_arrow_2.png';
+import PlaceholderImage  from '@/assets/images/product/placeholder-image.png';
 
 const product = useProductStore()
 const currentIndex = ref(0)
@@ -26,7 +27,7 @@ function changePreview(index){
 }
 </script>
 <template>
-    <div class="product-container__gallery" v-if="product.currentProduct.media_gallery">
+    <div class="product-container__gallery" v-if="product.currentProduct.media_gallery.length != 0">
         <div class="gallery-main">
             <img :src="GalleryArrow" class="product-container__actions-left" @click="left"/>
             <img :src="GalleryArrow" class="product-container__actions-right" @click="right"/>
@@ -38,6 +39,11 @@ function changePreview(index){
             <template v-for="(image, index) in product.currentProduct.media_gallery" :key="image.url">
                 <img class="preview-image" :src="image.url" :data-index="index" @click="changePreview(index)"/>
             </template>
+        </div>
+    </div>
+    <div class="product-container__gallery" v-if="product.currentProduct.media_gallery == 0">
+        <div class="gallery-main">
+            <img :src="PlaceholderImage"/>
         </div>
     </div>
 </template>

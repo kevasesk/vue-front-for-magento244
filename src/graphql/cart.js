@@ -93,6 +93,36 @@ export const ADD_SIMPLE_TO_CART = gql`
         }
     }
 `;
+export const ADD_CONFIGURABLE_TO_CART = gql`
+    mutation ADD_CONFIGURABLE_TO_CART($cartId: String!, $qty: Float!, $sku: String!, $parentSku: String!, $selectedOptions: [ID!]) {
+        addConfigurableProductsToCart(
+            input: {
+                cart_id: $cartId
+                cart_items: [
+                    {
+                        data: {
+                            quantity: $qty
+                            sku: $sku
+                            parent_sku: $parentSku
+                            selected_options: $selectedOptions
+                        }
+                    }
+                ]
+            }
+        ) {
+            cart {
+                items {
+                    id
+                    product {
+                        name
+                    }
+                    quantity
+                }
+            }
+        }
+    }
+
+`;
 
 export const SET_SHIPPING_ADDRESS = gql`
     mutation SET_SHIPPING_ADDRESS(

@@ -12,6 +12,7 @@ export const useProductStore = defineStore('product', {
     state: () => ({
         currentProduct: null,
         noty: useNotyStore(),
+        selectedOptions: [],
         tabs: [
             {
                 key: 'description',
@@ -49,6 +50,13 @@ export const useProductStore = defineStore('product', {
         },
         getTabAttribute(key) {
             return this.currentProduct[key].html || '';
+        },
+        isVisibleTab(key){
+            if (key == 'reviews'){
+                return true;
+            }
+
+            return this.currentProduct.hasOwnProperty(key) && this.currentProduct[key].html;
         },
         formatDate(originalDateString){
             const date = new Date(originalDateString);

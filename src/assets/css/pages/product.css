@@ -27,6 +27,8 @@
     margin-top: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--grey);
+    padding-bottom: 20px;
 }
 .product-container__price-stock .grid-right{
     justify-self: end;
@@ -74,7 +76,7 @@
 }
 .product-container__qty{
     padding-top: 20px;
-    border-top: 1px solid var(--grey);
+
 }
 .product-container__qty button{
     height: 35px;
@@ -112,4 +114,22 @@
     font-style: normal;
     font-weight: 700;
     line-height: 138.687%;
+}
+
+/*Config options*/
+.product-container__config-options{
+    padding: 20px 0px;
+}
+.product-container__attribute{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 20% 1fr;
+    margin-bottom: 10px;
+}
+.attribute__options{
+    padding: 10px 5px;
+    margin-left: 5px;
+    border: 1px solid var(--grey);
+    width: 200px;
+    background-color: white;
 }

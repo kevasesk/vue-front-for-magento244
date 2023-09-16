@@ -13,6 +13,25 @@ export const GET_PRODUCT = gql`
                 id
                 sku
                 name
+                type_id
+                ... on ConfigurableProduct {
+                    configurable_options {
+                        attribute_uid
+                        attribute_code
+                        label
+                        values {
+                            value_index
+                            label
+                        }
+                    }
+                    variants {
+                        product {
+                            sku
+                            color
+                            size
+                        }
+                    }
+                }
                 image{
                     url
                 }

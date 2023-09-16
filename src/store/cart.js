@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { usePageStore } from '@/store/page'
+import { useProductStore } from '@/store/product'
 import { useNotyStore } from '@/store/noty'
 import { useRouter } from 'vue-router';
 import { api } from '@/helpers/api'
@@ -7,6 +8,7 @@ import { api } from '@/helpers/api'
 import {
     CREATE_CART,
     ADD_SIMPLE_TO_CART,
+    ADD_CONFIGURABLE_TO_CART,
     GET_CART_ITEMS,
     REMOVE_ITEM_FROM_CART,
     COUNTRIES,
@@ -42,7 +44,9 @@ export const useCartStore = defineStore('cart', {
         },
         selected_shipping_carrier: null,
         selected_shipping_method: null,
-        selected_payment: null
+        selected_payment: null,
+        selectedOptionValueIndex: [],
+        product: useProductStore(),
     }),
     actions: {
         async initItems(){
@@ -67,7 +71,7 @@ export const useCartStore = defineStore('cart', {
                 });
             });
         },
-        async addToCart(sku, qty) {
+        async addToCartSimple(qty, sku){
             let token = await this.getCartToken();
             await api(ADD_SIMPLE_TO_CART, {
                 cartId: token,
@@ -77,6 +81,45 @@ export const useCartStore = defineStore('cart', {
                 this.noty.show('Items added to cart', 'success');
             });
 
+        },
+        findSkuByAttributes(colorValue, sizeValue = null) {
+            if (colorValue && sizeValue) {
+                for (const variant of this.product.currentProduct.variants) {
+                    if (variant.product.color === colorValue && variant.product.size === sizeValue) {
+                        return variant.product.sku;
+                    }
+                }
+            }
+
+            for (const variant of this.product.currentProduct.variants) {
+                if (variant.product.color === colorValue) {
+                    return variant.product.sku;
+                }
+            }
+
+            return null;
+        },
+        async addToCartConfigurable(sku, qty){
+            let token = await this.getCartToken();
+            let simpleSku = this.findSkuByAttributes(
+                this.selectedOptionValueIndex['color'],
+                this.selectedOptionValueIndex['size'],
+            );
+            let options = [
+                this.selectedOptionValueIndex['color'],
+                this.selectedOptionValueIndex['size'],
+            ].filter(item => item != null);
+            await api(ADD_CONFIGURABLE_TO_CART, {
+                cartId: token,
+                qty: qty,
+                sku: simpleSku,
+                parentSku: this.product.currentProduct.sku,
+                selectedOptions: options
+            }, 'mutate').then(response => {
+                this.noty.show('Items added to cart', 'success');
+            }).catch(error => {
+                console.log(error);
+            });
         },
         async setShippingAddress() {
             let token = localStorage.getItem(CART_TOKEN_NAME);

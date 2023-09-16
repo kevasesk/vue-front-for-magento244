@@ -12,7 +12,7 @@ const product = useProductStore()
 <template>
     <section class="product-tabs">
         <template v-for="tab in product.tabs">
-            <div class="product-tab">
+            <div class="product-tab" v-if="product.isVisibleTab(tab.key)">
                 <div class="product-tab__title" :class="{'product-tab__title-active': product.activeTabs[tab.key]}">
                     <img class="product-tab__icon" :src="TabPlus" @click="product.activeTabs[tab.key] = !product.activeTabs[tab.key]"/>
                     <div class="product-tab__text" @click="product.activeTabs[tab.key] = !product.activeTabs[tab.key]"><b>{{tab.title}}</b></div>

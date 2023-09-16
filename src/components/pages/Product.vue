@@ -6,6 +6,7 @@ import {onMounted, ref} from "vue";
 
 import Breadcrumbs from '@/components/product/Breadcrumbs.vue'
 import Gallery from '@/components/product/Gallery.vue'
+import ConfigOptions from '@/components/product/ConfigOptions.vue'
 import Tabs from '@/components/product/Tabs.vue'
 
 import Star from '@/assets/images/star.svg';
@@ -54,6 +55,7 @@ onMounted(() => {
                         SKU#:  <b>{{product.currentProduct.sku}}</b>
                     </div>
                 </div>
+                <ConfigOptions/>
                 <div class="product-container__qty">
                     Quantity:
                     <button @click="qty > 0 ? --qty : false;" class="product-container__button-minus">-</button>
@@ -61,7 +63,22 @@ onMounted(() => {
                     <button @click="++qty;" class="product-container__button-plus">+</button>
                 </div>
                 <div class="product-container__add-to-cart">
-                    <button class="green-button" type="button" @click.prevent="cart.addToCart(product.currentProduct.sku, qty)">Add to Cart</button>
+                    <button
+                        class="green-button"
+                        type="button"
+                        @click.prevent="cart.addToCartSimple(product.currentProduct.sku, qty)"
+                        v-if="product.currentProduct.type_id != 'configurable'"
+                    >
+                        Add to Cart
+                    </button>
+                    <button
+                        class="green-button"
+                        type="button"
+                        @click.prevent="cart.addToCartConfigurable(product.currentProduct.sku, qty)"
+                        v-if="product.currentProduct.type_id == 'configurable'"
+                    >
+                        Add to Cart
+                    </button>
                 </div>
                 <div class="product-container__actions">
 <!--                    <a href="#">Add to wishlist</a>-->
