@@ -48,10 +48,16 @@ export const GET_CART_ITEMS = gql`
             }
             items {
                 id
+                uid
                 quantity
                 product {
                     name
                     sku
+                    image{
+                        url
+                    }
+                    color
+                    size
                     price {
                         regularPrice {
                             amount {
@@ -61,6 +67,18 @@ export const GET_CART_ITEMS = gql`
                         }
                     }
                 }
+            }
+        }
+    }
+`;
+export const UPDATE_CART_ITEMS = gql`
+    mutation UPDATE_CART_ITEMS($cartId: String!, $cartItems: [CartItemUpdateInput]!){
+        updateCartItems(input: {
+            cart_id: $cartId,
+            cart_items: $cartItems
+        }){
+            cart{
+                id
             }
         }
     }
@@ -124,6 +142,26 @@ export const ADD_CONFIGURABLE_TO_CART = gql`
 
 `;
 
+export const REMOVE_PRODUCT_FROM_CART = gql`
+    mutation REMOVE_PRODUCT_FROM_CART($cartId: String!, $cartItemId: Int!) {
+        removeItemFromCart(
+            input: {
+                cart_id: $cartId
+                cart_item_id: $cartItemId
+            }
+        ) {
+            cart {
+                items {
+                    id
+                    product {
+                        name
+                    }
+                    quantity
+                }
+            }
+        }
+    }
+`;
 export const SET_SHIPPING_ADDRESS = gql`
     mutation SET_SHIPPING_ADDRESS(
         $cartId: String!,

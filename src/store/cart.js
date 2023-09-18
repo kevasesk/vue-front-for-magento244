@@ -10,6 +10,7 @@ import {
     ADD_SIMPLE_TO_CART,
     ADD_CONFIGURABLE_TO_CART,
     GET_CART_ITEMS,
+    UPDATE_CART_ITEMS,
     REMOVE_ITEM_FROM_CART,
     COUNTRIES,
     SET_GUEST_EMAIL,
@@ -19,6 +20,7 @@ import {
     SET_PAYMENT,
     PLACE_ORDER
 } from '@/graphql/cart'
+import {REMOVE_PRODUCT_FROM_CART} from "../graphql/cart";
 
 const CART_TOKEN_NAME = 'cartToken';
 
@@ -46,7 +48,12 @@ export const useCartStore = defineStore('cart', {
         selected_shipping_method: null,
         selected_payment: null,
         selectedOptionValueIndex: [],
+        quantities: [],
         product: useProductStore(),
+
+        country: null,
+        region: null,
+        zip: null
     }),
     actions: {
         async initItems(){
@@ -59,11 +66,13 @@ export const useCartStore = defineStore('cart', {
                 await api(GET_CART_ITEMS, {
                     cartId: token
                 }).then(response => {
-                    console.log(response.data.cart);//ysemenov
                     this.data = response.data.cart.items;
                     this.payments = response.data.cart.available_payment_methods;
-                    this.shipping = response.data.cart.shipping_addresses[0].available_shipping_methods;
+                    //this.shipping = response.data.cart.shipping_addresses[0].available_shipping_methods;
                     this.totals = response.data.cart.prices;
+                    this.data.forEach((item) => {
+                        this.quantities[item.uid] = item.quantity;
+                    });
                 });
 
                 await api(COUNTRIES).then(response => {
@@ -82,22 +91,24 @@ export const useCartStore = defineStore('cart', {
             });
 
         },
-        findSkuByAttributes(colorValue, sizeValue = null) {
-            if (colorValue && sizeValue) {
-                for (const variant of this.product.currentProduct.variants) {
-                    if (variant.product.color === colorValue && variant.product.size === sizeValue) {
-                        return variant.product.sku;
-                    }
-                }
-            }
-
-            for (const variant of this.product.currentProduct.variants) {
-                if (variant.product.color === colorValue) {
-                    return variant.product.sku;
-                }
-            }
-
-            return null;
+        async update(){
+            let token = await this.getCartToken();
+            let newQuantities = [];
+            this.data.forEach((item) => {
+                newQuantities.push({
+                    cart_item_uid: item.uid,
+                    quantity: this.quantities[item.uid]
+                });
+            });
+            await api(UPDATE_CART_ITEMS, {
+                cartId: token,
+                cartItems: newQuantities,
+            }, 'mutate').then(response => {
+                window.location.reload();
+                this.noty.show('Items updated!', 'success');
+            }).catch(error => {
+                console.log(error);
+            });
         },
         async addToCartConfigurable(sku, qty){
             let token = await this.getCartToken();
@@ -119,6 +130,19 @@ export const useCartStore = defineStore('cart', {
                 this.noty.show('Items added to cart', 'success');
             }).catch(error => {
                 console.log(error);
+            });
+        },
+        async deleteItem(item){
+            let token = localStorage.getItem(CART_TOKEN_NAME);
+            await api(REMOVE_PRODUCT_FROM_CART,{
+                cartId: token,
+                cartItemId: item.id
+            }, 'mutate').then(response => {
+                window.location.reload();
+                this.noty.show('Items removed from cart', 'success');
+            }).catch(error => {
+                console.log(error);
+                this.noty.show('Error', 'error');
             });
         },
         async setShippingAddress() {
@@ -205,6 +229,24 @@ export const useCartStore = defineStore('cart', {
             });
 
             return token;
-        }
+        },
+
+        findSkuByAttributes(colorValue, sizeValue = null) {
+            if (colorValue && sizeValue) {
+                for (const variant of this.product.currentProduct.variants) {
+                    if (variant.product.color === colorValue && variant.product.size === sizeValue) {
+                        return variant.product.sku;
+                    }
+                }
+            }
+
+            for (const variant of this.product.currentProduct.variants) {
+                if (variant.product.color === colorValue) {
+                    return variant.product.sku;
+                }
+            }
+
+            return null;
+        },
     },
 })
