@@ -26,6 +26,7 @@ const CART_TOKEN_NAME = 'cartToken';
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
+        router: useRouter(),
         data: null,
         email: 'john@gmail.com',
         payments: [],
@@ -68,7 +69,7 @@ export const useCartStore = defineStore('cart', {
                 }).then(response => {
                     this.data = response.data.cart.items;
                     this.payments = response.data.cart.available_payment_methods;
-                    //this.shipping = response.data.cart.shipping_addresses[0].available_shipping_methods;
+                    this.shipping = response.data.cart.shipping_addresses[0].available_shipping_methods;
                     this.totals = response.data.cart.prices;
                     this.data.forEach((item) => {
                         this.quantities[item.uid] = item.quantity;
@@ -176,6 +177,9 @@ export const useCartStore = defineStore('cart', {
             });
         },
         async setGuestEmail(){
+            if (!this.email) {
+                return;
+            }
             let token = localStorage.getItem(CART_TOKEN_NAME);
             await api(SET_GUEST_EMAIL, {
                 cartId: token,
@@ -211,7 +215,13 @@ export const useCartStore = defineStore('cart', {
                 // methodCode: this.selected_shipping_method,
                 // paymentCode: this.selected_payment,
             }, 'mutate').then(response => {
+                this.order_number = response.order_number
+
+                this.router.push({ name: 'Success' });
                 console.log(response);//ysemenov
+            }).catch(error => {
+                this.noty.show(error, 'error');
+                console.log(error);//ysemenov
             });
         },
         async getCartToken(){

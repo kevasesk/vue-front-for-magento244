@@ -17,6 +17,7 @@ import Subs from '@/components/pages/customer/Subs.vue'
 import Orders from '@/components/pages/customer/Orders.vue'
 import Cart from '@/components/checkout/Cart.vue'
 import CheckoutFirst from '@/components/checkout/CheckoutFirst.vue'
+import Success from '@/components/checkout/Success.vue'
 import Homepage from '@/components/pages/Homepage.vue'
 
 import NotFound from '@/components/pages/NotFound.vue'
@@ -36,6 +37,7 @@ const routes = [
     { path: '/account-orders', component: Orders, name:'account-orders', meta: { requiresAuth: true } },
     { path: '/cart', component: Cart },
     { path: '/checkout', component: CheckoutFirst },
+    { path: '/success', component: Success, name: 'Success' },
     { path: '/page', redirect: { name: 'NotFound' }},
     { path: '/page/:pageUrl', component: Page },
 

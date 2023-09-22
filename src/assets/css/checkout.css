@@ -289,6 +289,14 @@
 }
 .summary__item-img{
     justify-self: start;
+    width: 85px;
+    height: 85px;
+    border: 1px solid var(--grey);
+}
+.summary__item-desc{
+    display: grid;
+    justify-items: start;
+    justify-self: start;
 }
 .summary__item-price{
     justify-self: end;
@@ -343,10 +351,54 @@
     width: 20px;
     height: 20px;
 }
-
-
 .checkout-actions__wrapper{
     margin-top: 60px;
     display: flex;
     justify-content: space-between;
 }
+
+/* Success */
+.success-message{
+    margin-top: 50px;
+    display: grid;
+    justify-items: center;
+}
+.success-message__icon{
+    width: 100px;
+    height: 100px;
+    color: var(--green);
+    border: 15px solid var(--green);
+    border-radius: 100%;
+}
+.success-message__text{
+    margin-top: 30px;
+    font-size: 25px;
+    color: var(--green);
+}
+.success-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+}
+.success-address{
+    padding: 20px;
+}
+.success-address__title{
+    margin-top: 20px;
+    font-size: 20px;
+}
+.success-address__address{
+    margin-top:10px;
+}
+.success-delivery{
+    padding: 20px;
+}
+.success-delivery__title{
+    margin-top: 20px;
+    font-size: 20px;
+}
+.success-delivery__address{
+    margin-top:10px;
+}
+
+

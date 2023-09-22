@@ -1,31 +1,46 @@
 <script setup>
-import ActiveStep from '@/assets/images/active_step.png';
-import PassiveStep from '@/assets/images/passive_step.png';
-import ArrowDown from '@/assets/images/arrow_down.svg';
-import SummaryProductImage from '@/assets/images/summary_product_image.png';
-
 import {useCartStore} from "@/store/cart";
 import {usePageStore} from "@/store/page";
-import {onMounted} from "vue";
+import {storeToRefs} from 'pinia'
+import {onMounted, watch} from "vue";
+
+/**
+ * @type {import('@/store/cart').cart}
+ */
 const cart = useCartStore()
+const {
+    email,
+    address,
+    selected_shipping_carrier,
+    selected_shipping_method,
+    selected_payment
+} = storeToRefs(cart)
 const page = usePageStore()
+
 page.setTitle('Checkout')
 onMounted(() => {
     cart.initItems()
 })
+
+watch(email, async () => cart.setGuestEmail())
+watch(address, async () => cart.setShippingAddress(), { deep: true})
+watch(selected_shipping_carrier, async () => cart.setShipping(), { deep: true})
+watch(selected_shipping_method, async () => cart.setShipping(), { deep: true})
+watch(selected_payment, async () => cart.setPayment(), { deep: true})
+
 </script>
 <template>
     <div class="container">
         <div class="checkout-first">
-            <div class="steps-navigator">
+<!--            <div class="steps-navigator">-->
 
-                <img :src="ActiveStep"/>
-                <span>Shipping & Payments</span>
+<!--                <img :src="ActiveStep"/>-->
+<!--                <span>Shipping & Payments</span>-->
 
-                <img :src="PassiveStep"/>
-                <span>Success</span>
+<!--                <img :src="PassiveStep"/>-->
+<!--                <span>Success</span>-->
 
-            </div>
+<!--            </div>-->
             <div class="checkout">
                 <section class="checkout__inner">
                     <section class="customer-login">
@@ -67,7 +82,7 @@ onMounted(() => {
                             <label class="address__field-label">Email *</label>
                             <input class="address__field" type="text" v-model="cart.email"/>
                         </div>
-                        <button class="green-button" @click="cart.setGuestEmail()">set email</button>
+                        <!--<button class="green-button" @click="cart.setGuestEmail()">set email</button>-->
 
                         <div class="address__form-field address__form-field--street">
                             <label class="address__field-label">Street Address *</label>
@@ -103,7 +118,7 @@ onMounted(() => {
                                 <option value="2">USA</option>
                             </select>
                         </div>
-                        <button class="green-button" @click="cart.setShippingAddress()"> set shipping address</button>
+                        <!--<button class="green-button" @click="cart.setShippingAddress()"> set shipping address</button>-->
                     </section>
                     <section class="shipping-methods">
                         <h3 class="shipping-methods__title">Shipping Methods</h3>
@@ -118,15 +133,14 @@ onMounted(() => {
                                         @click="cart.selected_shipping_carrier = shipping.carrier_code; cart.selected_shipping_method = shipping.method_code"
                                     />
                                     <span class="shipping-methods__item-price">
-                                        {{shipping.amount.currency}}
-                                        {{shipping.amount.value}}
+                                        ${{shipping.amount.value}}
                                     </span>
                                 </span>
                                 <span class="shipping-methods__item-name" :data-code="shipping.carrier_code">{{shipping.carrier_title}}</span>
                                 <span class="shipping-methods__item-type" :data-code="shipping.method_code">{{shipping.method_title}}</span>
                             </div>
                         </div>
-                        <button class="green-button" @click="cart.setShipping()"> set shipping</button>
+                        <!--<button class="green-button" @click="cart.setShipping()"> set shipping</button>-->
                     </section>
                     <section class="payment-methods">
                         <h3 class="payment-methods__title">Payment Methods</h3>
@@ -142,7 +156,7 @@ onMounted(() => {
                                 <span class="payment-methods__item-name">{{ payment.title }}</span>
                             </div>
                         </div>
-                        <button class="green-button" @click="cart.setPayment()">Set Payment</button>
+                        <!--<button class="green-button" @click="cart.setPayment()">Set Payment</button>-->
                     </section>
                     <section class="checkout-actions">
                         <div class="checkout-actions__wrapper">
@@ -156,28 +170,21 @@ onMounted(() => {
                         <h3 class="summary__title">Order Summary</h3>
                         <div class="summary__items">
                             <div class="summary__items-count menu-text">
-                                <span class="summary__items-count-text">2 Item in Cart</span>
-                                <span class="summary__items-count-arrow"><img class="arrow" :src="ArrowDown"/></span>
+                                <span class="summary__items-count-text">{{cart?.data?.length}} Item in Cart</span>
+                                <!--<span class="summary__items-count-arrow"><img class="arrow" :src="ArrowDown"/></span>-->
                             </div>
-                            <div class="summary__item">
-                                <img class="summary__item-img" :src="SummaryProductImage"/>
+                            <div class="summary__item" v-for="item in cart.data">
+                                <img class="summary__item-img" :src="item.product.image.url"/>
                                 <div class="summary__item-desc">
-                                    <a class="summary__item-link" href="#">
-                                        Go-Get’r Pushup Grips
-                                    </a>
-                                    <span class="summary__item-qty">Qty: 3</span>
+                                    <router-link
+                                        :to="`/product/${item.product.sku}`"
+                                        class="summary__item-link"
+                                    >
+                                        {{ item.product.name }}
+                                    </router-link>
+                                    <span class="summary__item-qty">Qty: {{item.quantity}}</span>
                                 </div>
-                                <span class="summary__item-price">$19.00</span>
-                            </div>
-                            <div class="summary__item">
-                                <img class="summary__item-img" :src="SummaryProductImage"/>
-                                <div class="summary__item-desc">
-                                    <a class="summary__item-link" href="#">
-                                        Go-Get’r Pushup Grips
-                                    </a>
-                                    <span class="summary__item-qty">Qty: 3</span>
-                                </div>
-                                <span class="summary__item-price">$19.00</span>
+                                <span class="summary__item-price">${{ item.product.price.regularPrice.amount.value.toFixed(2) }}</span>
                             </div>
                         </div>
                     </div>
